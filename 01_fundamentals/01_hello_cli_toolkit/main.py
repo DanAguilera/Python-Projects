@@ -43,23 +43,26 @@ def simple_interest_calculator():
 def countdown_timer():
     print("Welcome to the Countdown Timer!")
     seconds = int(ask_for_number("Enter the number of seconds for the countdown: "))
+    original_seconds = seconds
     print("Starting countdown...")
     while seconds > 0:
         print(f"{seconds} seconds remaining...")
         time.sleep(1)
         seconds -= 1
     
-    return seconds
+    return original_seconds
 
 def password_strength_checker():
-        print("Welcome to the Password Strength Checker!")
-        password = input("Enter a password to check its strength: ")
-        strength = "Weak"
-        if len(password) >= 8:
-            strength = "Moderate"
-        if len(password) >= 12 and any(char.isdigit() for char in password) and any(char.isalpha() for char in password):
-            strength = "Strong"
-        return strength, password
+    print("Welcome to the Password Strength Checker!")
+    password = input("Enter a password to check its strength: ")
+
+    strength = "Weak"
+    if len(password) >= 8:
+        strength = "Moderate"
+    if len(password) >= 12 and any(char.isdigit() for char in password) and any(char.isalpha() for char in password):
+        strength = "Strong"
+
+    return strength
 
 def pause():
     input("Press Enter to return to the main menu")
