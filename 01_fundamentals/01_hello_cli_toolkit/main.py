@@ -7,6 +7,17 @@ def ask_for_number(prompt):
         except ValueError:
             print("Invalid input. Please enter a number.")
 
+def tip_calculator():
+    print("Welcome to the Tip Calculator!")
+    bill_amount = ask_for_number("Enter the bill amount: ")
+    tip_percentage = ask_for_number("Enter the tip percentage: ")
+    tip_amount = bill_amount * (tip_percentage / 100)
+    total_bill = bill_amount + tip_amount
+    print(f"Tip Amount: ${tip_amount:.2f}")
+    print(f"Total Bill: ${total_bill:.2f}")
+    input("Press Enter to return to the main menu...")
+
+
 def menu_loop():
     while True:
         print("Welcome to the CLI Toolkit!")
@@ -20,8 +31,7 @@ def menu_loop():
         choice = input("Please select an option: ")
 
         if choice == '1':
-            bill = ask_for_number("Enter the bill amount: ")
-            print(f"You selected Option 1. Bill amount: {bill}")
+            tip_calculator()
         elif choice == '2':
             print("You selected Option 2")
         elif choice == '3':
