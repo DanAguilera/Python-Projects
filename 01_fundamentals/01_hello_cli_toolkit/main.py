@@ -1,3 +1,12 @@
+def ask_for_number(prompt): 
+    while True:
+        value = input(prompt)
+        try:
+            number = float(value)
+            return number
+        except ValueError:
+            print("Invalid input. Please enter a number.")
+
 def menu_loop():
     while True:
         print("Welcome to the CLI Toolkit!")
@@ -11,7 +20,8 @@ def menu_loop():
         choice = input("Please select an option: ")
 
         if choice == '1':
-            print("You selected Option 1")
+            bill = ask_for_number("Enter the bill amount: ")
+            print(f"You selected Option 1. Bill amount: {bill}")
         elif choice == '2':
             print("You selected Option 2")
         elif choice == '3':
@@ -28,4 +38,3 @@ def menu_loop():
 
 if __name__ == "__main__":
     menu_loop()
-
