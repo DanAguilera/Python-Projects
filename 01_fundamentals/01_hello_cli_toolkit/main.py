@@ -2,11 +2,14 @@ import time
 
 
 
-def ask_for_number(prompt): 
+def ask_for_number(prompt, non_negative=true):
     while True:
         value = input(prompt)
         try:
             number = float(value)
+            if non_negative and number < 0:
+                print("Please enter a non-negative number.")
+                continue
             return number
         except ValueError:
             print("Invalid input. Please enter a number.")
@@ -14,7 +17,7 @@ def ask_for_number(prompt):
 def tip_calculator():
     print("Welcome to the Tip Calculator!")
     
-    bill_amount = ask_for_number("Enter the bill amount: ")
+    bill_amount = ask_for_number("Enter the bill amount: ", non_negative=True)
     tip_percentage = ask_for_number("Enter the tip percentage: ")
     tip_amount = bill_amount * (tip_percentage / 100)
     total_bill = bill_amount + tip_amount
