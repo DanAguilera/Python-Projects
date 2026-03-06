@@ -9,10 +9,11 @@ pokemon_team = [
 print("My Pokémon team:", pokemon_team)
 
 output = ','.join(pokemon['name'] for pokemon in pokemon_team)
-print("Pokémon names joined my team:", output)
+print("Pokémon has joined my team:", output)
 
 def view_team():
-    print("Current Pokémon team:", pokemon_team)
+    for pokemon in pokemon_team:
+        print(f"{pokemon['name']} (Type: {pokemon['type']}, Level: {pokemon['level']})")
 
 
 def add_pokemon():
@@ -25,7 +26,19 @@ def add_pokemon():
 
     print(f"{new_pokemon} has been added to your team.")
 
+def find_pokemon():
+    search = input("Enter the name of the Pokémon you want to find: ")
+    for pokemon in pokemon_team:
+        if pokemon['name'].lower() == search.lower():
+            return pokemon
+        elif pokemon['type'].lower() == search.lower():
+            return pokemon
+        elif search.isdigit() and pokemon['level'] == int(search):
+            return pokemon
+    return None
+
 add_pokemon()
 view_team()
 print(pokemon_team)
+
 
