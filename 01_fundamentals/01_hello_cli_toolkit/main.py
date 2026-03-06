@@ -2,7 +2,7 @@ import time
 
 
 
-def ask_for_number(prompt, non_negative=true):
+def ask_for_number(prompt, non_negative= True):
     while True:
         value = input(prompt)
         try:
