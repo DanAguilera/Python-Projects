@@ -1,5 +1,6 @@
 import math 
 import numbers
+import time
 
 def tip_calculator():
     bill_amount = float(input("Enter the bill amount: "))
