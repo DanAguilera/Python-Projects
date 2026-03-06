@@ -1,4 +1,3 @@
-import time
 import math 
 import numbers
 
@@ -18,6 +17,7 @@ def bmi_calculator():
     bmi = weight / (height ** 2) * 703  # Convert to BMI using imperial units
     
     return bmi
+
 def simple_interest_calculator():
     principal = float(input("Enter the principal amount: "))
     rate = float(input("Enter the annual interest rate (in %): "))
@@ -26,6 +26,7 @@ def simple_interest_calculator():
     interest = principal * rate * years / 100  # Convert rate to decimal
     
     return interest 
+
 def countdown_timer():      
     seconds = int(input("Enter the number of seconds for the countdown: "))
     original_seconds = seconds
