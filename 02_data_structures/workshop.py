@@ -8,7 +8,7 @@ pokemon_team = [
 ]
 print("My Pokémon team:", pokemon_team)
 
-output = ','.join(pokemon['name'] for pokemon in pokemon_team)
+output = ', '.join(pokemon['name'] for pokemon in pokemon_team)
 print("Pokémon has joined my team:", output)
 
 def view_team():
@@ -37,8 +37,19 @@ def find_pokemon():
             return pokemon
     return None
 
-add_pokemon()
+result = find_pokemon()
+if result:
+        print(f"Found Pokémon: {result['name']} (Type: {result['type']}, Level: {result['level']})")
+else:
+        print("Pokémon not found in the team.")
+
+
+
+
+
+
 view_team()
 print(pokemon_team)
+find_pokemon()
 
 
