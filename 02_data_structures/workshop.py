@@ -1,3 +1,5 @@
+import json
+
 pokemon_team = [
     {"name": "Pikachu", "type": "Electric", "level": 25},
     {"name": "Charizard", "type": "Fire/Flying", "level": 36},
@@ -10,6 +12,20 @@ print("My Pokémon team:", pokemon_team)
 
 output = ", ".join(pokemon["name"] for pokemon in pokemon_team)
 print("Pokémon on my team:", output)
+
+def save_team():
+    with open("pokemon_team.json", "w") as file:
+        json.dump(pokemon_team, file)
+
+def load_team():
+    global pokemon_team
+    try:
+        with open("pokemon_team.json", "r") as file:
+            pokemon_team = json.load(file)
+    except FileNotFoundError:
+        print("No saved team found. Starting fresh.")
+
+
 
 
 def view_team():
@@ -25,6 +41,7 @@ def add_pokemon():
     }
     pokemon_team.append(new_pokemon)
     print(f"{new_pokemon['name']} has been added to your team.")
+    save_team()
 
 
 def find_pokemon():
@@ -40,6 +57,16 @@ def find_pokemon():
     
     return None
 
+def remove_pokemon():
+    selection = input("Enter the name of the Pokémon you want to remove: ")
+    for pokemon in pokemon_team:
+        if pokemon['name'].lower() == selection.lower():
+            pokemon_team.remove(pokemon)
+            print(f"{pokemon['name']} has been removed from your team.")
+        return
+
+    print(f"{selection} is not in your team.")
+    save_team()
 
 def menu():
     while True:
@@ -47,7 +74,8 @@ def menu():
         print("1. View Pokémon Team")
         print("2. Add a Pokémon")
         print("3. Find a Pokémon")
-        print("4. Exit")
+        print("4. Remove a Pokémon")
+        print("5. Exit")
 
         choice = input("Enter your choice: ")
 
@@ -62,6 +90,8 @@ def menu():
             else:
                 print("Pokémon not found in the team.")
         elif choice == "4":
+            remove_pokemon()
+        elif choice == "5":
             print("Exiting the program.")
             break
         else:
@@ -69,5 +99,6 @@ def menu():
 
 
 menu()
+load_team()
 
 
