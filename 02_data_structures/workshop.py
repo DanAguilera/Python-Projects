@@ -1,4 +1,3 @@
-
 pokemon_team = [
     {"name": "Pikachu", "type": "Electric", "level": 25},
     {"name": "Charizard", "type": "Fire/Flying", "level": 36},
@@ -6,10 +5,12 @@ pokemon_team = [
     {"name": "Squirtle", "type": "Water", "level": 18},
     {"name": "Gengar", "type": "Ghost/Poison", "level": 30}
 ]
+
 print("My Pokémon team:", pokemon_team)
 
-output = ', '.join(pokemon['name'] for pokemon in pokemon_team)
-print("Pokémon has joined my team:", output)
+output = ", ".join(pokemon["name"] for pokemon in pokemon_team)
+print("Pokémon on my team:", output)
+
 
 def view_team():
     for pokemon in pokemon_team:
@@ -23,33 +24,50 @@ def add_pokemon():
         "level": int(input("Enter the level of the new Pokémon: "))
     }
     pokemon_team.append(new_pokemon)
+    print(f"{new_pokemon['name']} has been added to your team.")
 
-    print(f"{new_pokemon} has been added to your team.")
 
 def find_pokemon():
-    search = input("Enter the name of the Pokémon you want to find: ")
+    search = input("Enter the name, type, or level of the Pokémon you want to find: ")
+    
     for pokemon in pokemon_team:
-        if pokemon['name'].lower() == search.lower():
+        if pokemon["name"].lower() == search.lower():
             return pokemon
-        elif pokemon['type'].lower() == search.lower():
+        elif pokemon["type"].lower() == search.lower():
             return pokemon
-        elif search.isdigit() and pokemon['level'] == int(search):
+        elif search.isdigit() and pokemon["level"] == int(search):
             return pokemon
+    
     return None
 
-result = find_pokemon()
-if result:
-        print(f"Found Pokémon: {result['name']} (Type: {result['type']}, Level: {result['level']})")
-else:
-        print("Pokémon not found in the team.")
+
+def menu():
+    while True:
+        print("\nMenu:")
+        print("1. View Pokémon Team")
+        print("2. Add a Pokémon")
+        print("3. Find a Pokémon")
+        print("4. Exit")
+
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            view_team()
+        elif choice == "2":
+            add_pokemon()
+        elif choice == "3":
+            result = find_pokemon()
+            if result:
+                print(f"Found Pokémon: {result['name']} (Type: {result['type']}, Level: {result['level']})")
+            else:
+                print("Pokémon not found in the team.")
+        elif choice == "4":
+            print("Exiting the program.")
+            break
+        else:
+            print("Invalid choice. Please try again.")
 
 
-
-
-
-
-view_team()
-print(pokemon_team)
-find_pokemon()
+menu()
 
 
