@@ -1,5 +1,5 @@
 import json
-
+# using this workshop to take an interest and combining that with data structures and file handling. 
 pokemon_team = [
     {"name": "Pikachu", "type": "Electric", "level": 25},
     {"name": "Charizard", "type": "Fire/Flying", "level": 36},
@@ -9,7 +9,7 @@ pokemon_team = [
 ]
 
 print("My Pokémon team:", pokemon_team)
-
+# 'w' is for write, 'r' is for read, 'a' is for append.
 output = ", ".join(pokemon["name"] for pokemon in pokemon_team)
 print("Pokémon on my team:", output)
 
@@ -63,10 +63,11 @@ def remove_pokemon():
         if pokemon['name'].lower() == selection.lower():
             pokemon_team.remove(pokemon)
             print(f"{pokemon['name']} has been removed from your team.")
-        return
+            save_team()
+            return
 
     print(f"{selection} is not in your team.")
-    save_team()
+    
 
 def menu():
     while True:
@@ -98,7 +99,8 @@ def menu():
             print("Invalid choice. Please try again.")
 
 
-menu()
 load_team()
+menu()
+
 
 
