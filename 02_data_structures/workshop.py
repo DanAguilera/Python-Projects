@@ -1,11 +1,12 @@
 import json
 # using this workshop to take an interest and combining that with data structures and file handling. 
+
 pokemon_team = [
-    {"name": "Pikachu", "type": "Electric", "level": 25},
-    {"name": "Charizard", "type": "Fire/Flying", "level": 36},
-    {"name": "Bulbasaur", "type": "Grass/Poison", "level": 15},
-    {"name": "Squirtle", "type": "Water", "level": 18},
-    {"name": "Gengar", "type": "Ghost/Poison", "level": 30}
+    {"name": "Pikachu", "type": "Electric", "level": 25, "hp": 100},
+    {"name": "Charizard", "type": "Fire/Flying", "level": 36, "hp": 100},
+    {"name": "Bulbasaur", "type": "Grass/Poison", "level": 15, "hp": 100},
+    {"name": "Squirtle", "type": "Water", "level": 18, "hp": 100},
+    {"name": "Gengar", "type": "Ghost/Poison", "level": 30, "hp": 100}
 ]
 
 print("My Pokémon team:", pokemon_team)
@@ -67,6 +68,35 @@ def remove_pokemon():
             return
 
     print(f"{selection} is not in your team.")
+
+
+
+#Attacking and Defending functions 
+def attack(attacker, defender):
+    damage = 10
+    defender["hp"] -= damage 
+
+    print(f"{attacker['name']} attacks{defender['name']} for {damage} damage!")
+
+def battle(pokemon1, pokemon2):
+    print(f"\nA battle starts between {pokemon1['name']} and {pokemon2['name']}!\n")
+
+    while pokemon1["hp"] > 0 and pokemon2["hp"] > 0:
+        attack(pokemon1, pokemon2)
+
+        if pokemon2["hp"] <= 0:
+            print(f"{pokemon2['name']} has fainted!")
+            print(f"{pokemon1['name']} wins the battle!\n")
+            break
+
+        attack(pokemon2, pokemon1)
+
+        if pokemon1["hp"] <= 0:
+            print(f"{pokemon1['name']} has fainted!")
+            print(f"{pokemon2['name']} wins the battle!\n")
+            break
+
+#Menu loop
     
 
 def menu():
@@ -100,6 +130,7 @@ def menu():
 
 
 load_team()
+battle(pokemon_team[0], pokemon_team[1])
 menu()
 
 
