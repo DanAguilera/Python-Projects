@@ -16,3 +16,9 @@ for tool in tools:
     print(tool)
 for i in range(len(tools)):
     print(tools[i])
+
+#Enumearte() and functionality: The enumerate() function in Python is a built-in tool that adds a counter to an iterable (like a list, tuple, or string) and returns it as an enumerate object
+#fruits = ['apple', 'banana', 'cherry']
+#for index, fruit in enumerate(fruits):
+    #print(f"Index {index}: {fruit}")
+

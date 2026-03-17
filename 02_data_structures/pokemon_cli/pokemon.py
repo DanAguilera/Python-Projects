@@ -1,4 +1,5 @@
 import json
+from operator import call
 import random
 # using this workshop to take an interest and combining that with data structures and file handling. 
 
@@ -28,15 +29,25 @@ def load_team():
         print("No saved team found. Starting fresh.")
 
 
-
-
 # def view_team():
 #     for pokemon in pokemon_team:
 #         print(f"{pokemon['name']} (Type: {pokemon['type']}, Level: {pokemon['level']}), HP: {pokemon['hp']}")
 
 def view_team():
+    #enumerate(..., start=1) is just for displaying a human-friendly number
     for index, pokemon in enumerate(pokemon_team, start=1):
-        print(f"Pokemon {index}: {pokemon['name']}, {pokemon['type']}, {pokemon['level']}, {pokemon['hp']}")
+        print(f"Pokemon {index}: {pokemon['name']},  {pokemon['type']}, {pokemon['level']}, {pokemon['hp']}")
+
+
+def select_pokemon():
+    view_team()
+    choice = int(input("Choose a pokemon you want to use for battle? "))
+    #
+    pokemon = pokemon_team[choice - 1]
+
+    print(f"You have selected {pokemon['name']}!")
+
+    return pokemon
 
 
 def add_pokemon():
@@ -132,7 +143,14 @@ def menu():
             else:
                 print("Pokémon not found in the team.")
         elif choice == "4":
-            battle(pokemon_team[0], pokemon_team[1])
+            pokemon1 = select_pokemon()
+            pokemon2 = select_pokemon()
+            
+            while pokemon1 == pokemon2:
+                print("You cannot battle the same Pokémon. Please select a different one.")
+                pokemon2 = select_pokemon()
+
+            battle(pokemon1, pokemon2)
         elif choice == "5":
             remove_pokemon()
         elif choice == "6":
