@@ -1,14 +1,53 @@
 import json
-from operator import call
 import random
 # using this workshop to take an interest and combining that with data structures and file handling. 
 
 pokemon_team = [
-    {"name": "Pikachu", "type": "Electric", "level": 25, "hp": 100},
-    {"name": "Charizard", "type": "Fire/Flying", "level": 36, "hp": 100},
-    {"name": "Bulbasaur", "type": "Grass/Poison", "level": 15, "hp": 100},
-    {"name": "Squirtle", "type": "Water", "level": 18, "hp": 100},
-    {"name": "Gengar", "type": "Ghost/Poison", "level": 30, "hp": 100}
+    {"name": "Pikachu", 
+     "type": "Electric",
+     "level": 25,
+     "hp": 100,
+     "moves": [
+         {"name": "Thundershock", "type": "Electric", "power": 12},
+         {"name": "Quick Attack", "type": "Normal", "power": 10}
+     ]
+     },
+    {"name": "Charizard",
+     "type": "Fire/Flying",
+     "level": 36,
+     "hp": 100,
+     "moves": [
+         {"name": "Ember", "type": "Fire", "power": 14},
+         {"name": "Quick Attack", "type": "Normal", "power": 10}
+     ]
+     },
+    {"name": "Bulbasaur",
+     "type": "Grass/Poison",
+     "level": 15,
+     "hp": 100,
+     "moves": [
+         {"name": "Ember", "type": "Fire", "power": 14},
+         {"name": "Quick Attack", "type": "Normal", "power": 10}
+     ]
+     },
+    {"name": "Squirtle",
+     "type": "Water",
+     "level": 18,
+     "hp": 100,
+     "moves": [
+         {"name": "Ember", "type": "Fire", "power": 14},
+         {"name": "Quick Attack", "type": "Normal", "power": 10}
+     ]
+     },
+    {"name": "Gengar",
+     "type": "Ghost/Poison"
+     , "level": 30,
+     "hp": 100,
+     "moves": [
+         {"name": "Ember", "type": "Fire", "power": 14},
+         {"name": "Quick Attack", "type": "Normal", "power": 10}
+     ]
+     }
 ]
 
 print("My Pokémon team:", pokemon_team)
@@ -40,14 +79,16 @@ def view_team():
 
 
 def select_pokemon():
-    view_team()
-    choice = int(input("Choose a pokemon you want to use for battle? "))
-    #
-    pokemon = pokemon_team[choice - 1]
+    while True:
+        view_team()
+        choice = int(input("Choose a pokemon you want to use for battle? "))
 
-    print(f"You have selected {pokemon['name']}!")
-
-    return pokemon
+        if choice < 1 or choice > len(pokemon_team):
+            print("Invalid choice. Please select a valid Pokémon number.")
+        else:
+            pokemon = pokemon_team[choice - 1]
+            print(f"You have selected {pokemon['name']}!")
+            return pokemon
 
 
 def add_pokemon():
@@ -60,6 +101,8 @@ def add_pokemon():
     pokemon_team.append(new_pokemon)
     print(f"{new_pokemon['name']} has been added to your team.")
     save_team()
+    
+    
 
 
 def find_pokemon():
@@ -89,8 +132,12 @@ def remove_pokemon():
 
 
 #Attacking and Defending functions 
-def attack(attacker, defender):
+def attack(attacker, defender, move):
     damage = random.randint(8, 15)
+    crit = random.randint(1,100)
+    if crit <= 20:
+        damage = damage * 2
+        print("CRITICAL HIT")
     defender["hp"] -= damage
 
     if defender["hp"] < 0:
