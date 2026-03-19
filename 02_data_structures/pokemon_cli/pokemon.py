@@ -133,7 +133,7 @@ def remove_pokemon():
 
 #Attacking and Defending functions 
 def attack(attacker, defender, move):
-    damage = random.randint(8, 15)
+    damage = move["power"]
     crit = random.randint(1,100)
     if crit <= 20:
         damage = damage * 2
@@ -143,21 +143,22 @@ def attack(attacker, defender, move):
     if defender["hp"] < 0:
         defender["hp"] = 0
 
-    print(f"{attacker['name']} attacks {defender['name']} for {damage} damage!")
+    print(f"{attacker['name']} attacks {defender['name']} using {move['name']} for {damage} damage!")
     print(f"{defender['name']} now has {defender['hp']} HP left.\n")
 
 def battle(pokemon1, pokemon2):
     print(f"\nA battle starts between {pokemon1['name']} and {pokemon2['name']}!\n")
-
+    
     while pokemon1["hp"] > 0 and pokemon2["hp"] > 0:
-        attack(pokemon1, pokemon2)
+        move1 = random.choice(pokemon1["moves"])
+        attack(pokemon1, pokemon2, move1)
 
         if pokemon2["hp"] <= 0:
             print(f"{pokemon2['name']} has fainted!")
             print(f"{pokemon1['name']} wins the battle!\n")
             break
-
-        attack(pokemon2, pokemon1)
+        move2 = random.choice(pokemon2["moves"])
+        attack(pokemon2, pokemon1, move2)
 
         if pokemon1["hp"] <= 0:
             print(f"{pokemon1['name']} has fainted!")
