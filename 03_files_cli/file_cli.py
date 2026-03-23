@@ -31,7 +31,9 @@
 #     contents = file.read()
 #     print("\n Reading file")
 #     print(contents)
+from datetime import datetime
 
+datetime.now()
 
 filename = input("Enter file name: ")
 
@@ -54,8 +56,9 @@ def writefile():
 #OPTION 3     
 def appendfile():
     with open(filename, 'a') as file:
-        user_input = input("Enter Something? ")
-        file.write(user_input + '\n')    
+        current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        user_input = input("Enter Something: ")
+        file.write(f"[{current_time}] {user_input}\n")
 
 #OPTION 4       
 def searchfile():
@@ -64,9 +67,9 @@ def searchfile():
 
     try:
         with open(filename, 'r') as file:
-            for line in file:
+            for index, line in enumerate(file, start=1):
                 if keyword in line.lower():
-                    print(line.strip())
+                    print(f"Line {index}: {line.strip()}")
                     found = True
 
         if not found:
