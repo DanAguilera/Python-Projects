@@ -188,6 +188,10 @@ def battle(pokemon1, pokemon2):
             print(f"{pokemon1['name']} has fainted!")
             print(f"{pokemon2['name']} wins the battle!\n")
             break
+    
+    pokemon1["hp"] = 100
+    pokemon2["hp"] = 100 
+    print("pokemon have be healed for the next battle")
 
 #Menu loop
     
