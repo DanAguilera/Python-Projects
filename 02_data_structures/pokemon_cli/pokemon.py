@@ -50,6 +50,13 @@ pokemon_team = [
      }
 ]
 
+type_advantages = {
+    "Fire": "Grass",
+    "Water": "Fire", 
+    "Electric": "Water",
+    "Grass": "Water"
+}
+
 print("My Pokémon team:", pokemon_team)
 # 'w' is for write, 'r' is for read, 'a' is for append.
 output = ", ".join(pokemon["name"] for pokemon in pokemon_team)
@@ -134,17 +141,34 @@ def remove_pokemon():
 #Attacking and Defending functions 
 def attack(attacker, defender, move):
     damage = move["power"]
+    
+    #TYPE ADVANTAGE
+    move_type = move["type"]
+    
+    if move_type in type_advantages:
+        strong_against = type_advantages[move_type]
+        
+        if strong_against in defender["type"]:
+            damage = damage * 2
+            print("Its super effective!")
+            
+    #CRIT
+    
     crit = random.randint(1,100)
-    if crit <= 20:
+    if crit >= 20:
         damage = damage * 2
-        print("CRITICAL HIT")
+        print("CRITICAL HIT!")
+        
+    #APPLY DAMAGE
+    
     defender["hp"] -= damage
-
+    
     if defender["hp"] < 0:
         defender["hp"] = 0
-
-    print(f"{attacker['name']} attacks {defender['name']} using {move['name']} for {damage} damage!")
+        
+    print(f"{attacker['name']} uses {move['name']} on {defender['name']} for {damage} damage!")
     print(f"{defender['name']} now has {defender['hp']} HP left.\n")
+    
 
 def battle(pokemon1, pokemon2):
     print(f"\nA battle starts between {pokemon1['name']} and {pokemon2['name']}!\n")
