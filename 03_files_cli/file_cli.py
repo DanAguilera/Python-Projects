@@ -31,41 +31,82 @@
 #     contents = file.read()
 #     print("\n Reading file")
 #     print(contents)
+
+
+filename = input("Enter file name: ")
+
+#OPTION 1
 def readfile():
-    with open('sample.txt', 'r') as file:
-        for line in file:
-            print(line.strip())
-            
+    try:
+        with open(filename, 'r') as file:
+            for line in file:
+                print(line.strip())
+    except FileNotFoundError:
+        print("File does not exist yet")
+        
+#OPTION 2            
 def writefile():
-    with open('sample.txt', 'w') as file:
+    with open(filename, 'w') as file:
         file.write("New file was created\n")
-        user_input = input("write something")
+        user_input = input("write something? ")
         file.write(user_input + '\n'  ) 
-         
+
+#OPTION 3     
 def appendfile():
-    with open('sample.txt', 'a') as file:
-        user_input = input("Enter Something")
-        file.write(user_input + '\n')        
+    with open(filename, 'a') as file:
+        user_input = input("Enter Something? ")
+        file.write(user_input + '\n')    
 
-while True:
-    print("\n Main Menu")
-    print("1: Read File")
-    print("2: Write File")
-    print("3: Append File")
-    print("4: Exit")
+#OPTION 4       
+def searchfile():
+    keyword = input("Enter the keyword to search for: ")
     
-    choice = input("Please select an Option")
+    if not keyword:
+        print("Keyword cannot be empty.")
+        return
+
+    try:
+        with open(filename, 'r') as file:
+            found = False
+
+            for line in file:
+                cleaned_line = line.strip()
+
+                if keyword in cleaned_line:
+                    print(cleaned_line)
+                    found = True
+
+            if not found:
+                print(f"No lines containing '{keyword}' were found.")
+
+    except FileNotFoundError:
+        print(f"Error: The file '{filename}' was not found.")
+  
+
+
+def menuloop():
+    while True:
+        print("\n Main Menu")
+        print("1: Read File")
+        print("2: Write File")
+        print("3: Append File")
+        print("4: Search File")
+        print("5: Exit")
     
-    if choice == "1":
-        readfile()
-    elif choice == "2":
-        writefile()
-    elif choice == "3":
-        appendfile()
-    elif choice == "4":
-        break 
-    else:
-        print("Invalid option. Try again.")
-
-
-
+        choice = input("Please select an Option? ")
+    
+        if choice == "1":
+            readfile()
+        elif choice == "2":
+            writefile()
+        elif choice == "3":
+            appendfile()
+        elif choice == "4":
+            searchfile()
+        elif choice == "5":
+            break
+        else:
+            print("Choose a valid option")
+            
+            
+menuloop()
