@@ -59,28 +59,21 @@ def appendfile():
 
 #OPTION 4       
 def searchfile():
-    keyword = input("Enter the keyword to search for: ")
-    
-    if not keyword:
-        print("Keyword cannot be empty.")
-        return
+    keyword = input("Enter a keyword to search for: ").lower()
+    found = False
 
     try:
         with open(filename, 'r') as file:
-            found = False
-
             for line in file:
-                cleaned_line = line.strip()
-
-                if keyword in cleaned_line:
-                    print(cleaned_line)
+                if keyword in line.lower():
+                    print(line.strip())
                     found = True
 
-            if not found:
-                print(f"No lines containing '{keyword}' were found.")
+        if not found:
+            print("No matches found.")
 
     except FileNotFoundError:
-        print(f"Error: The file '{filename}' was not found.")
+        print("File does not exist yet.")
   
 
 
